@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segunda via de boleto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Our project just needs Font Awesome Free's Solid + Brand files -->
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <main class="container">
+        <div class="row">
+            <div class="col-12 text-center logo">
+                <img src="{% static 'img/logo.png' %}" class="img-fluid " alt="">
+            </div>
+
+            <div class="col-12 text-center logo">
+                <i class="fa-solid fa-triangle-exclamation texto"></i><p class="texto">Ops algo deu errado na sua busca, vamos tentar de novo, clique em voltar e digite novamente o seu <span class="facil">cpf ou cnpj</span>!</span></p>
+                <a href="javascript:history.back()" class="btn btn-primary button">Voltar</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+         document.write('<a href="' + document.referrer + '">Voltar</a>');
+    </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segunda via de boleto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Our project just needs Font Awesome Free's Solid + Brand files -->
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+
+
+</head>
+<body>
+    <main class="container">
+        <div class="row">
+            <div class="col-12 text-center logo">
+                <img src="{% static 'img/logo.png' %}" class="img-fluid " alt="">
+            </div>
+            
+            <div class="col-md-12 fundo" align="center">
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Linha Digitável</h5>
+                  <textarea class="text" style="margin-top: 25px;" readonly>{{digitavel.ld}}</textarea>
+                  <div>
+                  <a href="javascript:history.back()" class="btn btn-primary button">Voltar</a>
+                  <button class="btn btn-primary button" id="copy">Copiar</button>
+                 
+
+                </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+    
+    document.write('<a href="' + document.referrer + '">Voltar</a>');
+
+    let btn = document.querySelector('#copy');
+    btn.addEventListener('click', function(e) {
+    let textArea = document.querySelector('.text');
+    textArea.select()
+    document.execCommand('copy');
+    alert("Linha digitavel copiada com sucesso!");
+    });
+    </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

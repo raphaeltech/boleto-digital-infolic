@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segunda via de boleto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Our project just needs Font Awesome Free's Solid + Brand files -->
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <main class="container">
+        <div class="row">
+            <div class="col-12 text-center logo">
+                <img src="{% static 'img/logo.png' %}" class="img-fluid " alt="">
+            </div>
+            <div class="col-12 text-center logo">
+                <p class="texto">Tirar a segunda via da fatura nunca foi tão <span class="facil">fácil!</span></p>
+                <div class="col-12 d-flex justify-content-center flex-wrap">
+                  <div class="tabela">
+                    <table  class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Clicque no seu endereço</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                       <th scope="row"><a href="{% url 'pages:listarfaturas' clientes.CodigoPessoa %}">{{clientes.Endereco}}</a></th>
+                      </tr>
+                      
+                      {% for cliente in clientes.Outros %}
+                      <tr>
+                        <th scope="row"><a href="{% url 'pages:listarfaturas' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
+                       
+                      </tr>
+                      {% endfor %}
+                      
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
