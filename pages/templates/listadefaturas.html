@@ -23,7 +23,7 @@
     <main class="container">
         <div class="row">
             <div class="col-12 text-center logo">
-                <img src="{% static 'img/logo.png' %}" class="img-fluid " alt="">
+               <a href="{% url 'pages:home' %}"> <img src="{% static 'img/logo.png' %}" class="img-fluid " alt=""></a>
             </div>
             <div class="col-12 text-center logo">
                 <p class="texto">Tirar a segunda via da fatura nunca foi tão <span class="facil">fácil!</span></p>
@@ -40,12 +40,20 @@
                     </thead>
                     <tbody>
                       {% for fatura in faturas.FaturasPendentes %}
+                      {% if fatura.contratos != None %}
                       <tr>
-                        <td>{{fatura.data_vencimento}}</td>
-                        <td>{{fatura.descricao}}</td>
-                        <td>R$ {{fatura.valor_total}}</td>
+                        <td>{{ fatura.data_vencimento }}</td>
+                        <td>{{ fatura.descricao }}</td>
+                        <td>R$ {{ fatura.valor_total }}</td>
                         <td><a href="{% url 'pages:copiarfatura' fatura.codfatura %}"><i class="fa-solid fa-copy"></i></a> <a href="{% url 'pages:imprimirfatura' fatura.codfatura %}" target="_blank"><i class="fa-solid fa-print icone"></i></a></td>
                       </tr>
+                      {% endif %}
+                      {% empty %}
+                        <tr>
+                            <td colspan="4" align="center">
+                                Não consta faturas pendentes em seu cpf ou cnpj.
+                            </td>
+                        </tr>
                       {% endfor %}
                       
                     </tbody>

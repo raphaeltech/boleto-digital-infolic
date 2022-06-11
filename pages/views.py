@@ -8,9 +8,11 @@ def buscarCliente(request):
     if request.method == 'POST':
         context = {}
         doc = request.POST.get('doc', '')
-        
-        print(len(doc))
+        doc = doc.replace('.', '')
+        doc = doc.replace('-', '')
+        doc = doc.replace('/', '')
         if (len(doc) < 11):
+            print('cheguei aqui')
             return render(request, 'error.html')
         else:            
             tokenMK = requests.get('https://mksf.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=081da7f6f0f9996b3fa88780e4380d3b&password=3109188ce623658&cd_servico=9999')
@@ -49,6 +51,7 @@ def buscarCliente(request):
                     token = token["Token"]
                     faturas = requests.get('https://mksf.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
                     faturas = json.loads(faturas.content)
+                    print(faturas)
                     context['faturas'] = faturas
                     return render(request, 'listadefaturas.html', context=context)
                 else:
