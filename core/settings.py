@@ -25,8 +25,41 @@ SECRET_KEY = 'django-insecure-=@bmutz-fd5^7r(fienw_j=-ct4$pab7j^+7e0i@gmidyac+==
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+SITE_ID = 1
+BASE_URL = 'https://boletodigital.infolic.com.br'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','boletodigital.infolic.com.br', 'https://boletodigital.infolic.com.br', '127.0.0.1', '*']
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_REPLACE_HTTPS_REFERER = True
+
+CSRF_COOKIE_DOMAIN = 'boletodigital.infolic.com.br'
+
+CORS_ORIGIN_WHITELIST = [
+    'https://boletodigital.infolic.com.br',
+    'boletodigital.infolic.com.br',
+    'www.boletodigital.infolic.com.br',
+    'https://www.boletodigital.infolic.com.br',
+    ]
+
+CSRF_TRUSTED_ORIGINS = ['https://boletodigital.infolic.com.br',
+                        'https://www.boletodigital.infolic.com.br',
+        ]
+
+#SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#USE_X_FORWARDED_PORT = True
+#PREPEND_WWW = True
+#BASE_URL = "https://imap.infolic.net.br"
 
 
 # Application definition
@@ -38,7 +71,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django.contrib.sites',
     #APPs DO PROJETO
     'pages.apps.PagesConfig',
 
@@ -49,6 +82,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -128,7 +162,7 @@ MEDIA_ROOT = (os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]

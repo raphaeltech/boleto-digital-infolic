@@ -51,7 +51,7 @@ def buscarCliente(request):
                     token = token["Token"]
                     faturas = requests.get('https://mksf.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
                     faturas = json.loads(faturas.content)
-                    print(faturas)
+                    
                     context['faturas'] = faturas
                     return render(request, 'listadefaturas.html', context=context)
                 else:

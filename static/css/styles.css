@@ -1,20 +1,21 @@
 body{
     margin: 0;
     padding: 0;
+    height: auto;
     background-image: url("/static/img/Bg.png");
     background-repeat: no-repeat;
     background-size: cover;
     
 }
 .logo{
-    padding-top: 79px;
+    padding-top: 50px;
     
 }
 .texto{
     font-family: 'Exo 2';
     font-style: normal;
     font-weight: 700;
-    font-size: 64px;
+    font-size: 56px;    
     line-height: 77px;
     text-align: center;
     color: #FFFFFF;
@@ -29,8 +30,8 @@ body{
     width: 800px;
 }
 .doc {
-    margin-top: 25px;
-    margin-left: 25px;
+    #margin-top: 25px;
+    #margin-left: 25px;
     text-align: center;
     width: 400px;
 }
