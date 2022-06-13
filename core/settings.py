@@ -25,34 +25,34 @@ SECRET_KEY = 'django-insecure-=@bmutz-fd5^7r(fienw_j=-ct4$pab7j^+7e0i@gmidyac+==
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-SITE_ID = 1
-BASE_URL = 'https://boletodigital.infolic.com.br'
+#SITE_ID = 1
+#BASE_URL = 'https://boletodigital.infolic.com.br'
 
-ALLOWED_HOSTS = ['localhost','boletodigital.infolic.com.br', 'https://boletodigital.infolic.com.br', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['*']
 
-CORS_ALLOW_CREDENTIALS = True
+#CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOW_CREDENTIALS = True
+#CORS_ALLOW_CREDENTIALS = True
 
-CORS_REPLACE_HTTPS_REFERER = True
+#CORS_REPLACE_HTTPS_REFERER = True
 
-CSRF_COOKIE_DOMAIN = 'boletodigital.infolic.com.br'
+#CSRF_COOKIE_DOMAIN = 'boletodigital.infolic.com.br', 'localhost'
 
-CORS_ORIGIN_WHITELIST = [
-    'https://boletodigital.infolic.com.br',
-    'boletodigital.infolic.com.br',
-    'www.boletodigital.infolic.com.br',
-    'https://www.boletodigital.infolic.com.br',
-    ]
+#CORS_ORIGIN_WHITELIST = [
+#    'https://boletodigital.infolic.com.br',
+##    'boletodigital.infolic.com.br',
+ #   'www.boletodigital.infolic.com.br',
+ #   'https://www.boletodigital.infolic.com.br',
+  #  ]
 
-CSRF_TRUSTED_ORIGINS = ['https://boletodigital.infolic.com.br',
-                        'https://www.boletodigital.infolic.com.br',
-        ]
+#CSRF_TRUSTED_ORIGINS = ['https://boletodigital.infolic.com.br',
+ #                       'https://www.boletodigital.infolic.com.br', 'http://127.0.0.1', 'http://localhost'
+  #      ]
 
 #SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True

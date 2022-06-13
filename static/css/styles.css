@@ -2,11 +2,13 @@ body, html{
     margin: 0;
     padding: 0; 
 }
+
 .principal{
+    height: 100vh;
     background-image: url("/static/img/Bg.png");
     background-size: cover;
     width: auto;
-	height:100vh;
+	height:100vh; 
 }
 .logo{
     
@@ -33,19 +35,38 @@ body, html{
     width: 300px;
 }
 .button{
-    margin-top: 50px;
     background-color: #C7D200;
     font-size: 1.5rem;
     font-family: 'Exo 2';
     font-style: normal;
-    font-weight: 700;
     border: none;
     width: 200px;
 }
+.paginate_button{
+    background-color: #C7D200;
+    font-size: 1rem;
+    font-family: 'Exo 2';
+    font-style: normal;
+    border: none;
+    
+}
+
 .tabela{
     max-width: 700px;
     border-radius: 20px;
 }
+.digitavel{
+    width: 28rem;
+    border: none;
+    font-style: italic;
+    font-size: 0.9rem;
+    background: transparent;
+}
+textarea:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 
 
 
 .icone{
