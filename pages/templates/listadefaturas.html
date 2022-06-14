@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block conteudo %}
-                <div class="container-fluid text-center">
+                
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
                   <table  class="table table-hover tabela">
                     <thead>
                       <tr>
@@ -20,8 +23,8 @@
                         <td>{{ fatura.descricao }} 
                           <input type="{{fatura.codfatura}}" name="texto" id="{{fatura.codfatura}}" class="digitavel" placeholder="{{ fatura.ld }}" value="{{ fatura.ld }}" readonly/>
                         </td>
-                        <td>R$ {{ fatura.valor_total }} </td>
-                        <td><a href="#" onclick="copiarTexto(id = '{{fatura.codfatura}}');"><i class="fa-solid fa-copy"></i></a> <a href="{% url 'pages:imprimirfatura' fatura.codfatura %}" target="_blank"><i class="fa-solid fa-print"></i></a></td>
+                        <td style="width: 5rem;">R$ {{ fatura.valor_total }} </td>
+                        <td><a href="#" onclick="copiarTexto(id = '{{fatura.codfatura}}');"><i class="fa-solid fa-copy"></i></a> | <a href="{% url 'pages:imprimirfatura' fatura.codfatura %}" target="_blank"><i class="fa-solid fa-print"></i></a></td>
                       </tr>
                       {% endif %}
                       {% empty %}
@@ -34,41 +37,12 @@
                         {% endfor %}
                     </tbody>
                   </table>
-                </div>
+        </div>
+  </div>
+</div>
               
                                 
-                <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-                <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-
-
                 
-                <script>
-
-                function copiarTexto(id) {
-                        
-                        let textoCopiado = document.getElementById(id);
-                        console.log(textoCopiado.value)
-                        textoCopiado.select();
-                        document.execCommand("copy");
-                        alert("Linha digitavel copiada com sucesso!");
-                    }
-               
-  
-                $(document).ready(function(){
-                    $('#minhaTabela').DataTable({
-                        "language": {
-                              "lengthMenu": "Mostrando _MENU_ registros por página",
-                              "zeroRecords": "Nada encontrado",
-                              "info": "Mostrando página _PAGE_ de _PAGES_",
-                              "infoEmpty": "Nenhum registro disponível",
-                              "infoFiltered": "(filtrado de _MAX_ registros no total)",
-                              "searching": false
-                          }
-                          
-                      });
-                    
-                });
-</script>
-{% endblock %}
+{% endblock conteudo %}
 
           

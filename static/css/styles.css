@@ -6,10 +6,7 @@ body{
 	background-image: url("/static/img/Bg.png");
     background-size: cover;
 }
-.logo{
-    text-align: center;
-    justify-content: center;
-}
+
 .texto{
     font-family: 'Exo 2';
     font-style: normal;
@@ -22,14 +19,12 @@ body{
 .facil{
     color: #C7D200;
 }
-.form{
-    width: 800px;
-}
+
 .doc {
-    margin-top: 25px;
-    margin-left: 25px;
+    
+    
     text-align: center;
-    width: 300px;
+    width: 20rem;
 }
 .button{
     background-color: #C7D200;
@@ -37,7 +32,7 @@ body{
     font-family: 'Exo 2';
     font-style: normal;
     border: none;
-    width: 200px;
+    width: 20rem;
 }
 .paginate_button{
     background-color: #C7D200;
