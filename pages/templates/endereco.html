@@ -18,13 +18,28 @@
                       
                       {% for cliente in clientes.Outros %}
                       <tr>
-                        <th scope="row"><a href="{% url 'pages:listarfaturas' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
+                        <th scope="row"><a href="{% url 'pages:listarfaturas' cliente.CodigoPessoa %}" onclick="Clicar()">{{cliente.Endereco}}</a></th>
                        
                       </tr>
                       {% endfor %}
                       
                     </tbody>
                   </table>
+                  <form action="" method="post">
+                  <input type="text"  id="mk" name="mk" value="{{mk}}" style="display: none;"/>
+                  <button type="subimit" id="botao" style="display: none;"></button>
+                </form>
+                <script>
+
+                  function Clicar()
+                  
+                  {
+                  
+                  document.getElementById("botao").click();
+                  
+                  }
+                  
+                  </script>
                 </div>
               </div>
             </div>
