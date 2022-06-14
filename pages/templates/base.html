@@ -20,22 +20,56 @@
 
 </head>
 <body>
-    <main class="container-fluid main">
-        <div class="container-fluid row principal">
-            <div class="col-12 text-center logo">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-4 logo">
                 <a href="{% url 'pages:home' %}"> <img src="{% static 'img/logo.png' %}" class="img-fluid " alt=""></a>
+                <p class="texto text-center">Emitir sua fatura nunca foi tão <span class="facil">fácil!</span></p>
             </div>
-        
-            <p class="texto text-center">Emitir sua fatura nunca foi tão <span class="facil">fácil!</span></p>
-        
+          <div class="col-12">   
             {% block conteudo %}
             {% endblock conteudo %}
-
+          </div>
+        </div>
+    </div>
             
 
-        </div>
-    </main>
+      
+    </section>
+    {% block tabela %}
+    {% endblock tabela %}
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+                <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
+
+                
+                <script>
+
+                function copiarTexto(id) {
+                        
+                        let textoCopiado = document.getElementById(id);
+                        console.log(textoCopiado.value)
+                        textoCopiado.select();
+                        document.execCommand("copy");
+                        alert("Linha digitavel copiada com sucesso!");
+                    }
+               
+  
+                $(document).ready(function(){
+                    $('#minhaTabela').DataTable({
+                        "language": {
+                              "lengthMenu": "Mostrando _MENU_ registros por página",
+                              "zeroRecords": "Nada encontrado",
+                              "info": "Mostrando página _PAGE_ de _PAGES_",
+                              "infoEmpty": "Nenhum registro disponível",
+                              "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                              "searching": false
+                          }
+                          
+                      });
+                    
+                });
+</script>
 
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

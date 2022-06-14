@@ -1,17 +1,14 @@
-body, html{
-    margin: 0;
-    padding: 0; 
-}
 
-.principal{
+body{
+
     height: 100vh;
-    background-image: url("/static/img/Bg.png");
+    width: 100%;
+	background-image: url("/static/img/Bg.png");
     background-size: cover;
-    width: auto;
-	height:100vh; 
 }
 .logo{
-    
+    text-align: center;
+    justify-content: center;
 }
 .texto{
     font-family: 'Exo 2';
