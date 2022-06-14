@@ -16,6 +16,7 @@ body{
     
     
 }
+
 .facil{
     color: #C7D200;
 }
@@ -68,6 +69,17 @@ textarea:focus, input:focus, select:focus {
     color: #FFFFFF;
 
 }
-
+table {
+    width: 100%;
+    position: relative !important;
     
+  }
+
+.scroldiv{
+    width: 500px;
+    overflow: auto;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}    
 
