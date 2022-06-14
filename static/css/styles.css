@@ -52,8 +52,10 @@ body, html{
 }
 
 .tabela{
-    max-width: 700px;
-    border-radius: 20px;
+
+background-color: #FFFFFF;
+
+
 }
 .digitavel{
     width: 28rem;
