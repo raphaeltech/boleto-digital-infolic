@@ -72,8 +72,8 @@ background-color: #FFFFFF;
 
 }
 .input-digitavel{
-    margin-top: 1rem;
-    width: 28rem;
+    margin-top: 0.2rem;
+    width: 24rem;
     border: none;
     font-family: 'Exo 2';
     font-style: normal;
@@ -112,6 +112,9 @@ textarea:focus, input:focus, select:focus {
 .detalhe-a{
     height: 7rem;
     width: 5rem;
+    display: block;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .icone{
