@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
-            <div class="form">
+           
                                
-                
+<div class="row justify-content-center text-center">
                     <form action="{% url 'pages:bucarcliente' %}" method="POST">
                         {% csrf_token %}
-                        <div class="form-group">
-                            <div class="   col-md-12 offset-md-4">   
+                        
                     <input autofocus type="text" id="doc" name="doc" class="form-control doc" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Digite o seu CPF ou CNPJ">
                     <button type="submit" class="btn btn-primary button" style="margin-top: 2rem;">Buscar</button>
-                            </div>
+                            
                     </form>
+</div>
                 
             
             
