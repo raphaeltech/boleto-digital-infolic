@@ -32,7 +32,12 @@ a{
     
     
 }
-
+.texto-informativo{
+    font-family: 'Exo 2';
+    font-style: normal;
+    font-size: 1.5rem;
+    text-align: center;
+}
 .facil{
     color: #C7D200;
 }
@@ -66,23 +71,52 @@ background-color: #FFFFFF;
 
 
 }
-.digitavel{
+.input-digitavel{
+    margin-top: 1rem;
     width: 28rem;
     border: none;
-    font-style: italic;
-    font-size: 0.9rem;
-    background: transparent;
+    font-family: 'Exo 2';
+    font-style: normal;
+    font-size: 1.5rem;
+    resize: none;
+    overflow: auto;
+    user-select: none;
+    text-align: center;
 }
+.detalhe{
+
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+}
+
+
 textarea:focus, input:focus, select:focus {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
 } 
-
+.div-icone{
+    margin-top: 1rem;
+    /*display: grid;
+    text-align: center;
+    grid-template-columns: repeat(2, 0.5fr);
+    grid-auto-rows: 4rem; 
+    grid-gap: 2rem 2rem;
+    padding: 2rem 2rem;*/
+    display: flex;
+    
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+.detalhe-a{
+    height: 7rem;
+    width: 5rem;
+}
 
 .icone{
     font-size: 5rem;
-    color: #FFFFFF;
+    color: #0053fb;
 
 }
 table {
@@ -98,4 +132,6 @@ table {
     margin-left: auto;
     margin-right: auto;
 }    
-
+.voltar{
+    margin-top: 1rem;
+}

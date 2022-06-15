@@ -17,10 +17,12 @@
                       </tr>
                       
                       {% for cliente in clientes.Outros %}
+                      {% if cliente.Situacao != 'Inativo' %}
                       <tr>
                         <th scope="row"><a href="{% url 'pages:listarfaturas' cliente.CodigoPessoa %}" onclick="Clicar()">{{cliente.Endereco}}</a></th>
                        
                       </tr>
+                      {% endif %}
                       {% endfor %}
                       
                     </tbody>
