@@ -90,7 +90,6 @@ def buscarCliente(request):
                     faturas = requests.get('https://mksf.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
                     faturas = json.loads(faturas.content)
                     codigos = faturas['FaturasPendentes']
-                    print(codigos)
                     context['faturas'] = faturas
                     index = 0
                     
