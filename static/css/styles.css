@@ -137,5 +137,7 @@ table {
     margin-right: auto;
 }    
 .voltar{
-    margin-top: 1rem;
+    display: block;
+    align-items: center;
+    margin: 0 auto;
 }
