@@ -43,8 +43,7 @@ def buscarCliente(request):
                 cliente = cliente.json()    
                 if (len(cliente) == 3):
                     return render(request, 'error.html')
-                else:
-                    
+                                    
                 if (cliente['Outros'] == []):
                     CodigoPessoa = cliente['CodigoPessoa']     
                     CodigoPessoa = str(CodigoPessoa)       
