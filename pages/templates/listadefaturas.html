@@ -5,7 +5,7 @@
   <div class="row justify-content-md-center">
     <div class="col-md-auto scrol-div">
       
-      <select class="form-select" aria-label="Default select example" onchange="mudarSelect(this.value)">
+      <select class="form-select date" aria-label="Default select example" onchange="mudarSelect(this.value)">
         <option selected>Selecione o Vencimento</option>
         {% for fatura in faturas.FaturasPendentes  %}
         {% if fatura.contratos != None %}      
