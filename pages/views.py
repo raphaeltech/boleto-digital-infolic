@@ -69,18 +69,20 @@ def buscarCliente(request):
                             token = token["Token"]
                             digitavel = requests.get('https://mkcampos.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
                             digitavel = json.loads(digitavel.content)
+                        
                             if (len(digitavel)!= 3):
                                 digitavel = digitavel['DadosFatura'][0]
                                 digitavel = {'ld':digitavel['ld']}
                                 context['faturas']['FaturasPendentes'][index].update(digitavel)
                                 index +=1
-                
+                            else:
+                                digitavel = {'ld':'None'}
+                                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                                index +=1
                     return render(request, 'listadefaturas.html', context=context)
                 else:
-                    
                     context['clientes'] = cliente
                     return render(request, 'endereco.html', context=context)
-
             else:
                 if (cliente['Outros'] == []):
                     CodigoPessoa = cliente['CodigoPessoa']     
@@ -93,7 +95,6 @@ def buscarCliente(request):
                     codigos = faturas['FaturasPendentes']
                     context['faturas'] = faturas
                     index = 0
-                    
                     for codFatura in codigos:
                         if (codFatura['contratos'] != None):
                             codigoFatura = str(codFatura['codfatura'])
@@ -101,20 +102,21 @@ def buscarCliente(request):
                             token = json.loads(tokenMK.content)
                             token = token["Token"]
                             digitavel = requests.get('https://mksf.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
-                            digitavel = json.loads(digitavel.content)
+                            digitavel = json.loads(digitavel.content)                            
                             if (len(digitavel)!= 3):
                                 digitavel = digitavel['DadosFatura'][0]
                                 digitavel = {'ld':digitavel['ld']}
                                 context['faturas']['FaturasPendentes'][index].update(digitavel)
                                 index +=1
-                       
+                            else:
+                                digitavel = {'ld':'None'}
+                                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                                index +=1
                     context['faturas'] = faturas
                     return render(request, 'listadefaturas.html', context=context)
                 else:
-                    
                     context['clientes'] = cliente
                     return render(request, 'endereco.html', context=context)
-
 def listarFaturas(request, CodigoPessoa):
     mk = request.POST.get('mk', '')
     context = {}
@@ -127,8 +129,7 @@ def listarFaturas(request, CodigoPessoa):
         faturas = json.loads(faturas.content)
         codigos = faturas['FaturasPendentes']
         context['faturas'] = faturas
-        index = 0
-                    
+        index = 0                    
         for codFatura in codigos:
             codigoFatura = str(codFatura['codfatura'])
             tokenMK = requests.get('https://mksf.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=081da7f6f0f9996b3fa88780e4380d3b&password=3109188ce623658&cd_servico=9999')
@@ -140,8 +141,11 @@ def listarFaturas(request, CodigoPessoa):
                 digitavel = digitavel['DadosFatura'][0]
                 digitavel = {'ld':digitavel['ld']}
                 context['faturas']['FaturasPendentes'][index].update(digitavel)
-                index +=1
-
+                index += 1
+            else:
+                digitavel = {'ld':'None'}
+                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                index += 1
         context['faturas'] = faturas
     else:
         CodigoPessoa = str(CodigoPessoa)
@@ -153,7 +157,6 @@ def listarFaturas(request, CodigoPessoa):
         codigos = faturas['FaturasPendentes']
         context['faturas'] = faturas
         index = 0
-                    
         for codFatura in codigos:
             codigoFatura = str(codFatura['codfatura'])
             tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
@@ -166,7 +169,10 @@ def listarFaturas(request, CodigoPessoa):
                 digitavel = {'ld':digitavel['ld']}
                 context['faturas']['FaturasPendentes'][index].update(digitavel)
                 index +=1
-
+            else:
+                digitavel = {'ld':'None'}
+                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                index +=1
         context['faturas'] = faturas
     return render(request, 'listadefaturas.html', context=context)             
 

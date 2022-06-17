@@ -8,13 +8,13 @@
       <select class="form-select" aria-label="Default select example" onchange="mudarSelect(this.value)">
         <option selected>Selecione o Vencimento</option>
         {% for fatura in faturas.FaturasPendentes  %}
-        {% if fatura.contratos != None %}      
+        {% if fatura.ld != None %}
         <option value="{{fatura.codfatura}}">{{ fatura.data_vencimento }}</option>
         {% endif %}
         {% endfor %}
       </select>
       {% for fatura in faturas.FaturasPendentes  %}
-      {% if fatura.contratos != None %}      
+      {% if fatura.ld != None %}     
       <div class="col-md-auto detalhe" id="detalhe-{{fatura.codfatura}}" class="row justify-content-center text-center" style="display: none;">
         <p class="texto-informativo">Clique no código para copiar!</p>
         <textarea class="input-digitavel" rows="2" cols="" onclick="this.focus();this.select();document.execCommand('copy');alert('Código copiado com sucesso!')" readonly="readonly">{{ fatura.ld }}</textarea>
