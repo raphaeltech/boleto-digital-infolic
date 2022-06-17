@@ -38,6 +38,17 @@ a{
     font-style: normal;
     font-size: 1.5rem;
     text-align: center;
+    
+}
+
+.texto-descricao{
+    font-family: 'Exo 2';
+    font-style: italic;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 20rem;
+    display: block;
+    margin: 0 auto;
 }
 .facil{
     color: #C7D200;

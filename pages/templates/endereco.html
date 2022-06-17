@@ -13,35 +13,28 @@
                     </thead>
                     <tbody>
                       <tr>
-                       <th scope="row"><a href="{% url 'pages:listarfaturas' clientes.CodigoPessoa %}">{{clientes.Endereco}}</a></th>
+                      {% if clientes.mk == 'sf' %}
+                       <th scope="row"><a  href="{% url 'pages:listarfaturasSF' clientes.CodigoPessoa %}">{{clientes.Endereco}}</a></th>
+                       {% elif clientes.mk == 'cps' %}
+                       <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' clientes.CodigoPessoa %}">{{clientes.Endereco}}</a></th>
+                       {% endif %}
                       </tr>
                       
                       {% for cliente in clientes.Outros %}
                       {% if cliente.Situacao != 'Inativo' %}
                       <tr>
-                        <th scope="row"><a href="{% url 'pages:listarfaturas' cliente.CodigoPessoa %}" onclick="Clicar()">{{cliente.Endereco}}</a></th>
-                       
+                        {% if clientes.mk == 'sf' %}
+                        <th scope="row"><a  href="{% url 'pages:listarfaturasSF' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
+                        {% elif clientes.mk == 'cps' %}
+                        <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
+                        {% endif %}
                       </tr>
                       {% endif %}
                       {% endfor %}
                       
                     </tbody>
                   </table>
-                  <form action="" method="post">
-                  <input type="text"  id="mk" name="mk" value="{{mk}}" style="display: none;"/>
-                  <button type="subimit" id="botao" style="display: none;"></button>
-                </form>
-                <script>
-
-                  function Clicar()
                   
-                  {
-                  
-                  document.getElementById("botao").click();
-                  
-                  }
-                  
-                  </script>
                 </div>
               </div>
             </div>
