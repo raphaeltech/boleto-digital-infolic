@@ -69,10 +69,11 @@ def buscarCliente(request):
                             token = token["Token"]
                             digitavel = requests.get('https://mkcampos.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
                             digitavel = json.loads(digitavel.content)
-                            digitavel = digitavel['DadosFatura'][0]
-                            digitavel = {'ld':digitavel['ld']}
-                            context['faturas']['FaturasPendentes'][index].update(digitavel)
-                            index +=1
+                            if (len(digitavel)!= 0):
+                                digitavel = digitavel['DadosFatura'][0]
+                                digitavel = {'ld':digitavel['ld']}
+                                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                                index +=1
                 
                     return render(request, 'listadefaturas.html', context=context)
                 else:
@@ -101,10 +102,11 @@ def buscarCliente(request):
                             token = token["Token"]
                             digitavel = requests.get('https://mksf.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
                             digitavel = json.loads(digitavel.content)
-                            digitavel = digitavel['DadosFatura'][0]
-                            digitavel = {'ld':digitavel['ld']}
-                            context['faturas']['FaturasPendentes'][index].update(digitavel)
-                            index +=1
+                            if (len(digitavel)!= 0):
+                                digitavel = digitavel['DadosFatura'][0]
+                                digitavel = {'ld':digitavel['ld']}
+                                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                                index +=1
                        
                     context['faturas'] = faturas
                     return render(request, 'listadefaturas.html', context=context)
@@ -134,10 +136,11 @@ def listarFaturas(request, CodigoPessoa):
             token = token["Token"]
             digitavel = requests.get('https://mksf.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
             digitavel = json.loads(digitavel.content)
-            digitavel = digitavel['DadosFatura'][0]
-            digitavel = {'ld':digitavel['ld']}
-            context['faturas']['FaturasPendentes'][index].update(digitavel)
-            index +=1
+            if (len(digitavel)!= 0):
+                digitavel = digitavel['DadosFatura'][0]
+                digitavel = {'ld':digitavel['ld']}
+                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                index +=1
 
         context['faturas'] = faturas
     else:
@@ -158,10 +161,11 @@ def listarFaturas(request, CodigoPessoa):
             token = token["Token"]
             digitavel = requests.get('https://mkcampos.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
             digitavel = json.loads(digitavel.content)
-            digitavel = digitavel['DadosFatura'][0]
-            digitavel = {'ld':digitavel['ld']}
-            context['faturas']['FaturasPendentes'][index].update(digitavel)
-            index +=1
+            if (len(digitavel)!= 0):
+                digitavel = digitavel['DadosFatura'][0]
+                digitavel = {'ld':digitavel['ld']}
+                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                index +=1
 
         context['faturas'] = faturas
     return render(request, 'listadefaturas.html', context=context)             
