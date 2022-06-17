@@ -50,6 +50,7 @@ a{
     margin: 0 auto;
 }
 .button{
+    margin-top: 1rem;
     background-color: #C7D200;
     font-size: 1.5rem;
     font-family: 'Exo 2';
@@ -137,7 +138,6 @@ table {
     margin-right: auto;
 }    
 .voltar{
-    margin-top: 1rem;
     display: block;
     align-items: center;
     margin: 0 auto;
