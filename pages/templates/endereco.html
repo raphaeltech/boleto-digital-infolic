@@ -13,9 +13,9 @@
                     </thead>
                     <tbody>
                       <tr>
-                      {% if clientes.mk == 'sf' %}
+                      {% if clientes.mk == sf %}
                        <th scope="row"><a  href="{% url 'pages:listarfaturasSF' clientes.CodigoPessoa %}">{{clientes.Endereco}}</a></th>
-                       {% elif clientes.mk == 'cps' %}
+                       {% elif clientes.mk == cps %}
                        <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' clientes.CodigoPessoa %}">{{clientes.Endereco}}</a></th>
                        {% endif %}
                       </tr>
@@ -23,9 +23,9 @@
                       {% for cliente in clientes.Outros %}
                       {% if cliente.Situacao != 'Inativo' %}
                       <tr>
-                        {% if clientes.mk == 'sf' %}
+                        {% if clientes.mk == sf %}
                         <th scope="row"><a  href="{% url 'pages:listarfaturasSF' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
-                        {% elif clientes.mk == 'cps' %}
+                        {% elif clientes.mk == cps %}
                         <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
                         {% endif %}
                       </tr>
