@@ -3006,7 +3006,7 @@ weather:
     - volcano
     - water
     - wind
-  label: Boleto Digital - Infolic Telecom
+  label: Boleto Infolic
 writing:
   icons:
     - blog
