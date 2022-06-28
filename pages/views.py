@@ -32,28 +32,34 @@ def buscarCliente(request):
             tokenMK = requests.get('https://mksf.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=081da7f6f0f9996b3fa88780e4380d3b&password=3109188ce623658&cd_servico=9999')
             token = json.loads(tokenMK.content)
             token = token["Token"]
-            cliente = requests.get('https://mksf.infolic.net.br/mk/WSMKConsultaDoc.rule?sys=MK0&token='+token+'&doc='+doc)
-            cliente = cliente.json()
-           
-            if (len(cliente) == 3):
-                tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
-                token = json.loads(tokenMK.content)
-                token = token["Token"]
-                cliente = requests.get('https://mkcampos.infolic.net.br/mk/WSMKConsultaDoc.rule?sys=MK0&token='+token+'&doc='+doc)
-                cliente = cliente.json()    
-                if (len(cliente) == 3):
-                    return render(request, 'error.html')
-                                    
-                if (cliente['Outros'] == []):
-                    CodigoPessoa = cliente['CodigoPessoa']     
+            clienteSf = requests.get('https://mksf.infolic.net.br/mk/WSMKConsultaDoc.rule?sys=MK0&token='+token+'&doc='+doc)
+            clienteSf = clienteSf.json()
+            
+            tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
+            token = json.loads(tokenMK.content)
+            token = token["Token"]
+            clienteRegional = requests.get('https://mkcampos.infolic.net.br/mk/WSMKConsultaDoc.rule?sys=MK0&token='+token+'&doc='+doc)
+            clienteRegional = clienteRegional.json()    
+            
+            if (len(clienteSf) == 3 and len(clienteRegional) == 3):
+                return render(request, 'error.html')
+            
+            elif(len(clienteSf) > 3 and len(clienteRegional) > 3):
+                context['clienteSf'] = clienteSf
+                context['clienteRegional'] = clienteRegional
+                return render(request, 'endereco.html', context=context)
+            
+            if (len(clienteSf) == 3):                            
+                if (clienteRegional['Outros'] == []):
+                    CodigoPessoa = clienteRegional['CodigoPessoa']     
                     CodigoPessoa = str(CodigoPessoa)       
                     tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
                     token = json.loads(tokenMK.content)
                     token = token["Token"]
-                    faturas = requests.get('https://mkcampos.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
-                    faturas = json.loads(faturas.content)
-                    codigos = faturas['FaturasPendentes']
-                    context['faturas'] = faturas
+                    faturasRegional = requests.get('https://mkcampos.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
+                    faturasRegional = json.loads(faturasRegional.content)
+                    codigos = faturasRegional['FaturasPendentes']
+                    context['faturasRegional'] = faturasRegional
                     index = 0
                     for codFatura in codigos:
                         if (codFatura['contratos'] != None):
@@ -61,34 +67,37 @@ def buscarCliente(request):
                             tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
                             token = json.loads(tokenMK.content)
                             token = token["Token"]
-                            digitavel = requests.get('https://mkcampos.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
-                            digitavel = json.loads(digitavel.content)
+                            digitavelRegional = requests.get('https://mkcampos.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
+                            digitavelRegional = json.loads(digitavelRegional.content)
                         
-                            if (len(digitavel)!= 3):
-                                digitavel = digitavel['DadosFatura'][0]
-                                digitavel = {'ld':digitavel['ld']}
-                                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                            if (len(digitavelRegional)!= 3):
+                                digitavelRegional = digitavelRegional['DadosFatura'][0]
+                                digitavelRegional = {'ld':digitavelRegional['ld']}
+                                context['faturasRegional']['FaturasPendentes'][index].update(digitavelRegional)
                                 index +=1
                             else:
-                                digitavel = {'ld':'None'}
-                                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                                digitavelRegional = {'ld':'None'}
+                                context['faturasRegional']['FaturasPendentes'][index].update(digitavelRegional)
                                 index +=1
+                    
+                    context['clienteRegional'] = clienteRegional
+                    
                     return render(request, 'listadefaturas.html', context=context)
                 else:
-                    context['clientes'] = cliente
+                    context['clienteRegional'] = clienteRegional
                     return render(request, 'endereco.html', context=context)
             else:
-                if (cliente['Outros'] == []):
-                    CodigoPessoa = cliente['CodigoPessoa']     
+                if (clienteSf['Outros'] == []):
+                    CodigoPessoa = clienteSf['CodigoPessoa']     
                     CodigoPessoa = str(CodigoPessoa)       
                     
                     tokenMK = requests.get('https://mksf.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=081da7f6f0f9996b3fa88780e4380d3b&password=3109188ce623658&cd_servico=9999')
                     token = json.loads(tokenMK.content)
                     token = token["Token"]
-                    faturas = requests.get('https://mksf.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
-                    faturas = json.loads(faturas.content)
-                    codigos = faturas['FaturasPendentes']
-                    context['faturas'] = faturas
+                    faturasSf = requests.get('https://mksf.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
+                    faturasSf = json.loads(faturasSf.content)
+                    codigos = faturasSf['FaturasPendentes']
+                    context['faturasSf'] = faturasSf
                     index = 0
                     for codFatura in codigos:
                         if (codFatura['contratos'] != None):
@@ -96,51 +105,56 @@ def buscarCliente(request):
                             tokenMK = requests.get('https://mksf.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=081da7f6f0f9996b3fa88780e4380d3b&password=3109188ce623658&cd_servico=9999')
                             token = json.loads(tokenMK.content)
                             token = token["Token"]
-                            digitavel = requests.get('https://mksf.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
-                            digitavel = json.loads(digitavel.content)                            
-                            if (len(digitavel)!= 3):
-                                digitavel = digitavel['DadosFatura'][0]
-                                digitavel = {'ld':digitavel['ld']}
-                                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                            digitavelSf = requests.get('https://mksf.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
+                            digitavelSf = json.loads(digitavelSf.content)                            
+                            if (len(digitavelSf)!= 3):
+                                digitavelSf = digitavelSf['DadosFatura'][0]
+                                digitavelSf = {'ld':digitavelSf['ld']}
+                                context['faturasSf']['FaturasPendentes'][index].update(digitavelSf)
                                 index +=1
                             else:
-                                digitavel = {'ld':'None'}
-                                context['faturas']['FaturasPendentes'][index].update(digitavel)
+                                digitavelSf = {'ld':'None'}
+                                context['faturasSf']['FaturasPendentes'][index].update(digitavelSf)
                                 index +=1
-                    context['faturas'] = faturas
+                    context['faturasSf'] = faturasSf
+                    
                     return render(request, 'listadefaturas.html', context=context)
                 else:
-                    context['clientes'] = cliente
-                    
+                    context['clienteSf'] = clienteSf
                     return render(request, 'endereco.html', context=context)
+
+
+
 def listarFaturasSF(request, CodigoPessoa): 
     context = {}
     CodigoPessoa = str(CodigoPessoa)
     tokenMK = requests.get('https://mksf.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=081da7f6f0f9996b3fa88780e4380d3b&password=3109188ce623658&cd_servico=9999')
     token = json.loads(tokenMK.content)
     token = token["Token"]
-    faturas = requests.get('https://mksf.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
-    faturas = json.loads(faturas.content)
-    codigos = faturas['FaturasPendentes']
-    context['faturas'] = faturas
-    index = 0                    
+    faturasSf = requests.get('https://mksf.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
+    faturasSf = json.loads(faturasSf.content)
+    codigos = faturasSf['FaturasPendentes']
+    context['faturasSf'] = faturasSf
+    index = 0
     for codFatura in codigos:
-        codigoFatura = str(codFatura['codfatura'])
-        tokenMK = requests.get('https://mksf.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=081da7f6f0f9996b3fa88780e4380d3b&password=3109188ce623658&cd_servico=9999')
-        token = json.loads(tokenMK.content)
-        token = token["Token"]
-        digitavel = requests.get('https://mksf.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
-        digitavel = json.loads(digitavel.content)
-        if (len(digitavel)!= 3):
-            digitavel = digitavel['DadosFatura'][0]
-            digitavel = {'ld':digitavel['ld']}
-            context['faturas']['FaturasPendentes'][index].update(digitavel)
-            index += 1
-        else:
-            digitavel = {'ld':'None'}
-            context['faturas']['FaturasPendentes'][index].update(digitavel)
-            index += 1
-    context['faturas'] = faturas
+        if (codFatura['contratos'] != None):
+            codigoFatura = str(codFatura['codfatura'])
+            tokenMK = requests.get('https://mksf.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=081da7f6f0f9996b3fa88780e4380d3b&password=3109188ce623658&cd_servico=9999')
+            token = json.loads(tokenMK.content)
+            token = token["Token"]
+            digitavelSf = requests.get('https://mksf.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
+            digitavelSf = json.loads(digitavelSf.content)                            
+            if (len(digitavelSf)!= 3):
+                digitavelSf = digitavelSf['DadosFatura'][0]
+                digitavelSf = {'ld':digitavelSf['ld']}
+                context['faturasSf']['FaturasPendentes'][index].update(digitavelSf)
+                index +=1
+            else:
+                digitavelSf = {'ld':'None'}
+                context['faturasSf']['FaturasPendentes'][index].update(digitavelSf)
+                index +=1
+    context['faturasSf'] = faturasSf
+    
     return render(request, 'listadefaturas.html', context=context)             
 
 def listarFaturasCPS(request, CodigoPessoa): 
@@ -149,28 +163,30 @@ def listarFaturasCPS(request, CodigoPessoa):
     tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
     token = json.loads(tokenMK.content)
     token = token["Token"]
-    faturas = requests.get('https://mkcampos.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
-    faturas = json.loads(faturas.content)
-    codigos = faturas['FaturasPendentes']
-    context['faturas'] = faturas
+    faturasRegional = requests.get('https://mkcampos.infolic.net.br/mk/WSMKFaturasPendentes.rule?sys=MK0&token='+token+'&cd_cliente='+CodigoPessoa)
+    faturasRegional = json.loads(faturasRegional.content)
+    codigos = faturasRegional['FaturasPendentes']
+    context['faturasRegional'] = faturasRegional
     index = 0
     for codFatura in codigos:
-        codigoFatura = str(codFatura['codfatura'])
-        tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
-        token = json.loads(tokenMK.content)
-        token = token["Token"]
-        digitavel = requests.get('https://mkcampos.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
-        digitavel = json.loads(digitavel.content)
-        if (len(digitavel)!= 3):
-            digitavel = digitavel['DadosFatura'][0]
-            digitavel = {'ld':digitavel['ld']}
-            context['faturas']['FaturasPendentes'][index].update(digitavel)
-            index +=1
-        else:
-            digitavel = {'ld':'None'}
-            context['faturas']['FaturasPendentes'][index].update(digitavel)
-            index +=1
-    context['faturas'] = faturas
+        if (codFatura['contratos'] != None):
+            codigoFatura = str(codFatura['codfatura'])
+            tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
+            token = json.loads(tokenMK.content)
+            token = token["Token"]
+            digitavelRegional = requests.get('https://mkcampos.infolic.net.br//mk/WSMKLDViaSMS.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
+            digitavelRegional = json.loads(digitavelRegional.content)
+        
+            if (len(digitavelRegional)!= 3):
+                digitavelRegional = digitavelRegional['DadosFatura'][0]
+                digitavelRegional = {'ld':digitavelRegional['ld']}
+                context['faturasRegional']['FaturasPendentes'][index].update(digitavelRegional)
+                index +=1
+            else:
+                digitavelRegional = {'ld':'None'}
+                context['faturasRegional']['FaturasPendentes'][index].update(digitavelRegional)
+                index +=1
+    
     return render(request, 'listadefaturas.html', context=context)             
 
 

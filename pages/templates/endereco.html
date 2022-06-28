@@ -8,29 +8,53 @@
                     <thead>
                       <tr>
                         <th scope="col">Clique no seu endereço</th>
-                        
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                      {% if clientes.mk == sf %}
-                       <th scope="row"><a  href="{% url 'pages:listarfaturasSF' clientes.CodigoPessoa %}">{{clientes.Endereco}}</a></th>
-                       {% elif clientes.mk == cps %}
-                       <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' clientes.CodigoPessoa %}">{{clientes.Endereco}}</a></th>
+                      {% if clienteRegional and clienteSf %}
+                      <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' clienteRegional.CodigoPessoa %}">{{clienteRegional.Endereco}}</a></th>
+                      </tr>
+                      {% for clienteRegional in clienteRegional.Outros %}
+                      <tr>
+                      {% if clienteRegional.Situacao != 'Inativo' %}
+                        <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' clienteRegional.CodigoPessoa %}">{{clienteRegional.Endereco}}</a></th>
+                      {% endif %}
+                      </tr>
+                      {% endfor %}
+                      <tr>
+                      <th scope="row"><a  href="{% url 'pages:listarfaturasSF' clienteSf.CodigoPessoa %}">{{clienteSf.Endereco}}</a></th>
+                      </tr>
+                      {% for clienteSf in clienteSf.Outros %}
+                      <tr>
+                      {% if clienteSf.Situacao != 'Inativo' %}
+                        <th scope="row"><a  href="{% url 'pages:listarfaturasSF' clienteSf.CodigoPessoa %}">{{clienteSf.Endereco}}</a></th>
+                      {% endif %}
+                      </tr>
+                      {% endfor %}
+                      {% elif clienteRegional %}
+                       <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' clienteRegional.CodigoPessoa %}">{{clienteRegional.Endereco}}</a></th>
+                       {% elif clienteSf %}
+                       <th scope="row"><a  href="{% url 'pages:listarfaturasSF' clienteSf.CodigoPessoa %}">{{clienteSf.Endereco}}</a></th>
                        {% endif %}
                       </tr>
-                      
-                      {% for cliente in clientes.Outros %}
-                      {% if cliente.Situacao != 'Inativo' %}
+                      {% if clienteRegional %}
+                      {% for cliente in clienteRegional.Outros %}
                       <tr>
-                        {% if clientes.mk == sf %}
-                        <th scope="row"><a  href="{% url 'pages:listarfaturasSF' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
-                        {% elif clientes.mk == cps %}
+                      {% if cliente.Situacao != 'Inativo' %}
                         <th scope="row"><a  href="{% url 'pages:listarfaturasCPS' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
-                        {% endif %}
-                      </tr>
                       {% endif %}
+                      </tr>
                       {% endfor %}
+                      {% elif clienteSf %}
+                      {% for cliente in clienteSf.Outros %}
+                      <tr>
+                      {% if cliente.Situacao != 'Inativo' %}
+                        <th scope="row"><a  href="{% url 'pages:listarfaturasSF' cliente.CodigoPessoa %}">{{cliente.Endereco}}</a></th>
+                      {% endif %}
+                      </tr>
+                      {% endfor %}
+                      {% endif %}
                       
                     </tbody>
                   </table>
