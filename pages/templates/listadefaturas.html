@@ -21,8 +21,9 @@
       <div class="col-md-auto detalhe" id="detalhe-{{fatura.codfatura}}" class="row justify-content-center text-center" style="display: none;">
         <p class="texto-informativo">Clique no código para copiar!</p>
         <p class="texto-descricao">"{{ fatura.contas }}"</p>
-        <textarea class="input-digitavel" rows="2" cols="" onclick="this.focus();this.select();document.execCommand('copy');alert('Código copiado com sucesso!')" readonly="readonly">{{ fatura.ld }}</textarea>
+        <textarea class="input-digitavel" rows="2" cols="" onclick="this.focus();this.select();document.execCommand('copy');salvar();alert('Código copiado com sucesso!')" readonly="readonly">{{ fatura.ld }}</textarea>
         <a href="{% url 'pages:imprimirfatura' fatura.codfatura %}" target="_blank" class="detalhe-a"><i class="fa-solid fa-print icone"></i></a>
+        <a href="{% url 'pages:salvarfatura' fatura.codfatura %}" id="copy" target="_blank" class="detalhe-a" style="display: none;"></a>
       </div>
       {% endif %}
       {% endfor %}
@@ -38,8 +39,9 @@
       <div class="col-md-auto detalhe" id="detalhe-{{fatura.codfatura}}" class="row justify-content-center text-center" style="display: none;">
         <p class="texto-informativo">Clique no código para copiar!</p>
         <p class="texto-descricao">"{{ fatura.contas }}"</p>
-        <textarea class="input-digitavel" rows="2" cols="" onclick="this.focus();this.select();document.execCommand('copy');alert('Código copiado com sucesso!')" readonly="readonly">{{ fatura.ld }}</textarea>
+        <textarea class="input-digitavel" rows="2" cols="" onclick="this.focus();this.select();document.execCommand('copy');salvar();alert('Código copiado com sucesso!')" readonly="readonly">{{ fatura.ld }}</textarea>
         <a href="{% url 'pages:imprimirfatura' fatura.codfatura %}" target="_blank" class="detalhe-a"><i class="fa-solid fa-print icone"></i></a>
+        <a href="{% url 'pages:salvarfatura' fatura.codfatura %}" id="copy" target="_blank" class="detalhe-a" style="display: none;"></i></a>
       </div>
       {% endif %}
       {% endfor %}
@@ -54,6 +56,12 @@
 
 
 <script>
+ function salvar(){
+  console.log(document.getElementById('copy'));
+				document.getElementById('copy').click();
+        
+ }
+
   let visibilidade = false
   function mudarSelect(valor){
   

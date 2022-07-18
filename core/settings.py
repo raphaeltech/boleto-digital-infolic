@@ -117,8 +117,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'boletoDigital',
+        'USER': 'boletodigital',
+        'PASSWORD': '75E3d7u!nJZ308hzi3K5v1cj*AApmh#Zo2PA7C02',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 
