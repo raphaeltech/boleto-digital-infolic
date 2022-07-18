@@ -119,7 +119,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'boletoDigital',
-        'USER': 'boletodigital',
+        'USER': 'root',
         'PASSWORD': '75E3d7u!nJZ308hzi3K5v1cj*AApmh#Zo2PA7C02',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
