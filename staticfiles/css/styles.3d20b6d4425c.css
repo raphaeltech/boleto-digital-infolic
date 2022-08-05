@@ -1,0 +1,155 @@
+
+body{
+    background-color: #0053fb;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+}
+form{
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.logo{
+    max-width: 20rem;
+}
+a{
+    text-align: center;
+}
+.texto{
+    font-family: 'Exo 2';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2rem;    
+    color: #FFFFFF;
+    
+    
+}
+.texto-informativo{
+    font-family: 'Exo 2';
+    font-style: normal;
+    font-size: 1.5rem;
+    text-align: center;
+    
+}
+
+.texto-descricao{
+    font-family: 'Exo 2';
+    font-style: italic;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 20rem;
+    display: block;
+    margin: 0 auto;
+}
+.facil{
+    color: #C7D200;
+}
+
+.doc {
+    text-align: center;
+    width: 20rem;
+    display: block;
+    margin: 0 auto;
+}
+.button{
+    margin-top: 1rem;
+    background-color: #C7D200;
+    font-size: 1.5rem;
+    font-family: 'Exo 2';
+    font-style: normal;
+    border: none;
+    width: 20rem;
+}
+.paginate_button{
+    background-color: #C7D200;
+    font-size: 1rem;
+    font-family: 'Exo 2';
+    font-style: normal;
+    border: none;
+    
+}
+
+.tabela{
+
+background-color: #FFFFFF;
+
+
+}
+.input-digitavel{
+    margin-top: 0.2rem;
+    width: 24rem;
+    border: none;
+    font-family: 'Exo 2';
+    font-style: normal;
+    font-size: 1.5rem;
+    resize: none;
+    overflow: auto;
+    user-select: none;
+    text-align: center;
+}
+.detalhe{
+
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+}
+
+
+textarea:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 
+.div-icone{
+    margin-top: 1rem;
+    /*display: grid;
+    text-align: center;
+    grid-template-columns: repeat(2, 0.5fr);
+    grid-auto-rows: 4rem; 
+    grid-gap: 2rem 2rem;
+    padding: 2rem 2rem;*/
+    display: flex;
+    
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+.detalhe-a{
+    height: 7rem;
+    width: 5rem;
+    display: block;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.icone{
+    font-size: 5rem;
+    color: #0053fb;
+
+}
+table {
+    width: 100%;
+    position: relative !important;
+    
+  }
+
+.scroldiv{
+    width: 500px;
+    overflow: auto;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}    
+.voltar{
+    display: block;
+    align-items: center;
+    margin: 0 auto;
+}
