@@ -201,9 +201,7 @@ def imprimirFatura(request, codFatura):
     token = token["Token"]
     urlFtura = requests.get('https://mksf.infolic.net.br/mk/WSMKSegundaViaCobranca.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
     urlFtura = json.loads(urlFtura.content)
-    cod_pessoa = urlFtura['CodigoPessoa']
-    vcto = urlFtura['Vcto']
-
+    
     if (len(urlFtura) == 3):
         tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
         token = json.loads(tokenMK.content)
@@ -217,6 +215,8 @@ def imprimirFatura(request, codFatura):
         objeto.save()
         return HttpResponseRedirect(urlFtura)
     else:
+        cod_pessoa = urlFtura['CodigoPessoa']
+        vcto = urlFtura['Vcto']
         urlFtura = urlFtura['PathDownload']
         objeto = Solicitacoes(cod_cliente=cod_pessoa, venc_Fatura=vcto, imprimiu=True, copiou=False)
         objeto.save()
@@ -231,9 +231,6 @@ def salvarFatura(request, codFatura):
     token = token["Token"]
     urlFtura = requests.get('https://mksf.infolic.net.br/mk/WSMKSegundaViaCobranca.rule?sys=MK0&token='+token+'&cd_fatura='+codigoFatura)
     urlFtura = json.loads(urlFtura.content)
-    cod_pessoa = urlFtura['CodigoPessoa']
-    vcto = urlFtura['Vcto']
-
     if (len(urlFtura) == 3):
         tokenMK = requests.get('https://mkcampos.infolic.net.br/mk/WSAutenticacao.rule?sys=MK0&token=641c07fb39ec86c547422769845608c8&password=3514b1c0d243236&cd_servico=9999')
         token = json.loads(tokenMK.content)
@@ -246,6 +243,8 @@ def salvarFatura(request, codFatura):
         objeto.save()
         return render(request, 'sucesso.html')  
     else:
+        cod_pessoa = urlFtura['CodigoPessoa']
+        vcto = urlFtura['Vcto']
         objeto = Solicitacoes(cod_cliente=cod_pessoa, venc_Fatura=vcto, imprimiu=False, copiou=True)
         objeto.save()
         return render(request, 'sucesso.html')  

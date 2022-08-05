@@ -1,4 +1,4 @@
-settings.py
+core/settings.py
 
 # Django #
 *.log
